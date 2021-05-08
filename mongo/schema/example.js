@@ -10,6 +10,7 @@ const Characs = model.Characs;
 // open a connection
 mongoose.connect(`mongodb://${address}/reviews_ratings`, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', (err, conn) => {
   console.log(`connected to mongoDB@${address}!`);

@@ -1,34 +1,28 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const style = new Schema({
-  style_id: Number,
+
+
+const StyleSchema = new Schema({
+  style_id: { type: Number, index: { unique: true } },
+  product_id: Number,
   name: String,
   original_price: String,
   sale_price: String,
-  default?: String,
+  default: String,
   photos: [{
     thumbnail_url: String,
     url: String
   }],
   skus: {
-    skus_id: {
-      quantity: Number,
-      size: String
-    }
+    type: Map, of: String
   }
-})
+}, { strict: false })
+StyleSchema.index({ style_id: 1 });
 
-const stylesSchema = new Schema({
-  product_id: String,
-  result: [style]
-});
+const Style = mongoose.model('Style', StyleSchema);
 
-
-const Styles = mongoose.model('Styles', stylesSchema);
-const Style = mongoose.model('Style', styleSchema);
 
 module.exports = {
-  Styles: Styles,
   Style: Style
 };

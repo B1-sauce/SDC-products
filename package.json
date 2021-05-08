@@ -6,7 +6,8 @@
   "scripts": {
     "test": "test",
     "start": "nodemon server.js",
-    "parser": "node mongo/transfer.js"
+    "parser": "node mongo/transfer.js",
+    "style": "node mongo/transferStyle.js"
   },
   "repository": {
     "type": "git",
