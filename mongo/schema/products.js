@@ -15,10 +15,31 @@ const productSchema = Schema({
 });
 productSchema.index({ id: 1 });
 
+
+const StyleSchema = new Schema({
+  style_id: { type: Number, index: { unique: true } },
+  product_id: { type: Number, index: true },
+  name: String,
+  original_price: String,
+  sale_price: String,
+  default: String,
+  photos: [{
+    thumbnail_url: String,
+    url: String
+  }],
+  skus: [{
+    size: String,
+    quantity: Number
+  }]
+})
+StyleSchema.index({ style_id: 1, product_id: 1 });
+
+
 const Product = mongoose.model('Product', productSchema);
-// const Feature = mongoose.model('Feature', featureSchema);
+const Style = mongoose.model('Style', StyleSchema);
+
 
 module.exports = {
   Product: Product,
-  // Feature: Feature
+  Style: Style
 };
