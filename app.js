@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Model = require('./mongo/schema/products')
 const Style = Model.Style;
 const Product = Model.Product;
+const path = require('path');
 
 var app = Express();
 app.use(BodyParser.json());
