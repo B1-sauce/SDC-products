@@ -103,3 +103,5 @@ dist
 # TernJS port file
 .tern-port
 *.csv
+*.pem
+loaderio-428fba728570a91948bfd0fe3efa8b9f.txt
