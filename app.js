@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/test1', { useNewUrlParser: true }, {
 const db = mongoose.connection;
 
 router.get('/loaderio-ea15dffc4acf1a237bf998540eb652cb/', (req, res) => {
-  res.send(path.join(__dirname, './loaderio-d70ce9175132d999fa0f36bf2d214fb0.txt'));
+  res.send(path.join(__dirname, './loaderio-ea15dffc4acf1a237bf998540eb652cb.txt'));
 })
 
 router.get('/products', (req, res) => {
