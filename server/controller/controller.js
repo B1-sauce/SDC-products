@@ -9,7 +9,7 @@ const client = redis.createClient(REDIS_PORT);
 const GET_ASYNC = promisify(client.get).bind(client)
 const SET_ASYNC = promisify(client.set).bind(client)
 
-const getProducts = (req, res) => {
+const getProducts = async (req, res) => {
   try {
     let page = Number(req.query.page);
     let count = Number(req.query.count);
@@ -32,7 +32,6 @@ const getProducts = (req, res) => {
       .catch(err => {
         console.log(err)
       })
-
     console.log('new data cached', saveResult)
     res.send(respone)
   } catch (error) {
