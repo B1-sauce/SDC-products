@@ -14,7 +14,6 @@ const getProducts = (req, res) => {
   let count = Number(req.query.count);
   Product.find({ id: { $gt: (page - 1) * count, $lt: page * count + 1 } })
     .then(result => {
-      client.set(result.id, js);
       res.status(201).send(result)
     })
     .catch(err => {
