@@ -10,15 +10,35 @@ const GET_ASYNC = promisify(client.get).bind(client)
 const SET_ASYNC = promisify(client.set).bind(client)
 
 const getProducts = (req, res) => {
-  let page = Number(req.query.page);
-  let count = Number(req.query.count);
-  Product.find({ id: { $gt: (page - 1) * count, $lt: page * count + 1 } })
-    .then(result => {
-      res.status(201).send(result)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+  try {
+    let page = Number(req.query.page);
+    let count = Number(req.query.count);
+    const reply = await GET_ASYNC(`${page}+${count}`)
+    if (reply) {
+      console.log('using cached data')
+      res.send(JSON.parse(reply))
+      return
+    }
+    Product.find({ id: { $gt: (page - 1) * count, $lt: page * count + 1 } })
+      .then(result => {
+        var saveResult = SET_ASYNC(
+          `${page}+${count}`,
+          JSON.stringify(result),
+          'EX',
+          5000
+        )
+        res.send(result)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    console.log('new data cached', saveResult)
+    res.send(respone)
+  } catch (error) {
+    res.send(error.message)
+  }
+
 }
 
 const getSingleProduct = async (req, res) => {
