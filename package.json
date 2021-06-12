@@ -8,7 +8,8 @@
     "start": "nodemon server/server.js",
     "parser": "node mongo/transfer.js",
     "style": "node mongo/transferStyle.js",
-    "testProduct": "k6 run ./specRunner/stressTest.js"
+    "testProduct": "k6 run ./specRunner/stressTestProducts.js",
+    "testSingle": "k6 run ./specRunner/stressTestSingle.js"
   },
   "jest": {
     "testEnvironment": "node"

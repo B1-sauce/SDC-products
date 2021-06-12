@@ -15,7 +15,6 @@ const getProducts = async (req, res) => {
     let count = Number(req.query.count);
     const reply = await GET_ASYNC(`${page}+${count}`)
     if (reply) {
-      console.log('using cached data')
       res.send(JSON.parse(reply))
       return
     }
@@ -27,13 +26,12 @@ const getProducts = async (req, res) => {
           'EX',
           5000
         )
+        console.log('new data cached', saveResult)
         res.send(result)
       })
       .catch(err => {
         console.log(err)
       })
-    console.log('new data cached', saveResult)
-    res.send(respone)
   } catch (error) {
     res.send(error.message)
   }
@@ -45,7 +43,6 @@ const getSingleProduct = async (req, res) => {
     let productId = req.params.product_id;
     const reply = await GET_ASYNC(productId)
     if (reply) {
-      console.log('using cached data')
       res.send(JSON.parse(reply))
       return
     }
@@ -57,14 +54,12 @@ const getSingleProduct = async (req, res) => {
           'EX',
           5000
         )
+        console.log('new data cached', saveResult)
         res.send(result)
       })
       .catch(err => {
         console.log(err)
       })
-
-    console.log('new data cached', saveResult)
-    res.send(respone)
   } catch (error) {
     res.send(error.message)
   }
@@ -75,7 +70,6 @@ const getStyle = async (req, res) => {
     let productId = req.params.product_id;
     const reply = await GET_ASYNC(`${productId}+style`)
     if (reply) {
-      console.log('using cached data')
       res.send(JSON.parse(reply))
       return
     }
@@ -88,13 +82,12 @@ const getStyle = async (req, res) => {
           'EX',
           5000
         )
+        console.log('new data cached', saveResult)
         res.send(result)
       })
       .catch(err => {
         console.log(err)
       })
-    console.log('new data cached', saveResult)
-    res.send(respone)
   } catch (error) {
     res.send(error.message)
   }
